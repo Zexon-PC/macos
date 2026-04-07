@@ -119,28 +119,60 @@
         /* --- HEADER AREA --- */
         .top-wrapper {
             background: rgba(15, 12, 41, 0.8); backdrop-filter: blur(10px);
-            position: sticky; top: 0; z-index: 100; padding-bottom: 15px;
+            position: sticky; top: 0; z-index: 100; 
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
+        
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        .header-right { display: flex; align-items: center; justify-content: flex-end; }
+        
+        /* DOUBLE GAP BETWEEN BUTTONS */
+        .stacked-btns { display: flex; flex-direction: column; gap: 24px; } 
+        
+        .os-logo { font-size: 28px; color: #fff; text-decoration: none; transition: 0.3s; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .os-logo:hover { transform: scale(1.1); }
+
+        /* PERFECT ALIGNMENT & CENTERING */
+        /* Center column aligns text and search perfectly, and shifts right based on remaining space */
+        .header-center { flex-grow: 1; max-width: 650px; margin: 0 40px; display: flex; flex-direction: column; gap: 12px; }
+
         .top-banner {
-            text-align: center; padding: 15px; font-size: 20px; font-weight: 700;
+            text-align: center; font-size: 15px; font-weight: 600;
             background: transparent; letter-spacing: 0.5px; color: white;
+            white-space: nowrap; width: 100%; margin: 0; padding: 0;
         }
         .top-banner .discount { color: #ff0000; }
         .top-banner .lifetime { color: #ffffff; }
         .top-banner .premium { color: #ffff00; }
 
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
-        .os-logo { font-size: 28px; color: #fff; text-decoration: none; transition: 0.3s; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        .os-logo:hover { transform: scale(1.1); }
-
-        .search-container { flex-grow: 1; max-width: 500px; margin: 0 20px; position: relative; }
+        .search-container { width: 100%; position: relative; margin: 0; }
         .search-container input {
             width: 100%; padding: 12px 20px; border-radius: 30px; border: none; outline: none; font-size: 16px;
             color: white; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
         }
         .search-container input:focus { background: rgba(255,255,255,0.15); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
+        .header-btn {
+            color: #ff9900; text-decoration: none; font-size: 13px; font-weight: 600;
+            background: rgba(255, 153, 0, 0.1); border: 1px solid rgba(255, 153, 0, 0.3);
+            padding: 4px 15px; border-radius: 15px; transition: 0.3s;
+            text-shadow: 0 0 10px rgba(255, 153, 0, 0.5); letter-spacing: 0.5px;
+            white-space: nowrap; text-align: center;
+        }
+        .header-btn:hover {
+            transform: scale(1.05); background: rgba(255, 153, 0, 0.2); box-shadow: 0 0 10px rgba(255, 153, 0, 0.4); color: #fff;
+        }
+
+        .btn-plugin {
+            color: #00ff00;
+            background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.3);
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .btn-plugin:hover {
+            background: rgba(0, 255, 0, 0.2); box-shadow: 0 0 10px rgba(0, 255, 0, 0.4); color: #fff;
+        }
 
         /* --- BUNDLE PLAN --- */
         .bundle-section {
@@ -293,7 +325,17 @@
         .download-ios { background: rgba(10, 132, 255, 0.15); border: 1px solid rgba(10, 132, 255, 0.5); color: #0A84FF; text-shadow: 0 0 10px rgba(10,132,255,0.5); flex-direction: column; gap: 5px; padding: 10px; }
 
         #search-error { text-align: center; color: #ff4d4d; font-size: 20px; display: none; width: 100%; margin-top: 50px; }
-        @media (max-width: 600px) { header { flex-wrap: wrap; gap: 15px; justify-content: center; } .search-container { order: 3; margin: 0; max-width: 100%; } }
+        
+        /* MOBILE RESPONSIVE ADJUSTMENTS */
+        @media (max-width: 850px) {
+            .top-banner { white-space: normal; line-height: 1.4; font-size: 13px;}
+        }
+        @media (max-width: 600px) { 
+            header { flex-wrap: wrap; gap: 15px; justify-content: center; } 
+            .header-left, .header-right { justify-content: center; width: auto; }
+            .header-center { order: 3; margin: 10px 0 0 0; max-width: 100%; width: 100%; } 
+            .stacked-btns { flex-direction: row; gap: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -309,16 +351,29 @@
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
     </div>
+    
     <div class="top-wrapper">
-        <div class="top-banner">
-            All software at <span class="discount">99%</span> off the official price + <span class="lifetime">Lifetime</span> <span class="premium">Premium Access</span>
-        </div>
         <header>
-            <a href="#" onclick="event.preventDefault(); window.location.href='https://zexon-pc.github.io/macos/';" class="os-logo" title="macOS Supported"><i class="fa-brands fa-apple"></i> macOS</a>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search software....">
+            <div class="header-left">
+                <a href="#" onclick="event.preventDefault(); window.location.href='https://zexon-pc.github.io/macos/';" class="os-logo" title="macOS Supported"><i class="fa-brands fa-apple"></i> macOS</a>
+                <div class="stacked-btns">
+                    <a href="support" class="header-btn" title="Support">Support</a>
+                    <a href="plugin" class="header-btn btn-plugin" title="Plugin">Plugin</a>
+                </div>
             </div>
-            <a href="#" onclick="event.preventDefault(); window.location.href='https://zexon-pc.github.io/windows/';" class="os-logo" id="windowsLink" title="Go to Windows Store"><i class="fa-brands fa-windows"></i></a>
+            
+            <div class="header-center">
+                <div class="top-banner">
+                    All software at <span class="discount">99%</span> off the official price + <span class="lifetime">Lifetime</span> <span class="premium">Premium Access</span>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search software....">
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <a href="#" onclick="event.preventDefault(); window.location.href='https://zexon-pc.github.io/windows/';" class="os-logo" id="windowsLink" title="Go to Windows Store"><i class="fa-brands fa-windows"></i></a>
+            </div>
         </header>
     </div>
 
