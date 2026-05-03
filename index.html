@@ -59,7 +59,7 @@
 
         /* Smooth Entry For Website Elements */
         .top-wrapper { animation: smoothDrop 1s cubic-bezier(0.25, 0.8, 0.25, 1) 2.4s backwards; }
-        .bundle-section { animation: smoothUp 1s cubic-bezier(0.25, 0.8, 0.25, 1) 2.6s backwards; }
+        .bundle-section, .tutorial-section { animation: smoothUp 1s cubic-bezier(0.25, 0.8, 0.25, 1) 2.6s backwards; }
         .software-card { animation: smoothUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) backwards; }
         
         /* Staggered load for cards */
@@ -135,7 +135,6 @@
         .os-logo:hover { transform: scale(1.1); }
 
         /* PERFECT ALIGNMENT & CENTERING */
-        /* Center column aligns text and search perfectly, and shifts right based on remaining space */
         .header-center { flex-grow: 1; max-width: 650px; margin: 0 40px; display: flex; flex-direction: column; gap: 12px; }
 
         .top-banner {
@@ -176,7 +175,7 @@
 
         /* --- BUNDLE PLAN --- */
         .bundle-section {
-            text-align: center; margin: 40px auto; width: 90%; max-width: 1000px; padding: 50px 30px;
+            text-align: center; margin: 40px auto 20px auto; width: 90%; max-width: 1000px; padding: 50px 30px;
             background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
         }
@@ -217,6 +216,35 @@
             transform: skewX(-20deg); animation: slideLight 4s infinite linear;
         }
         .btn-bundle:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(13, 59, 223, 0.9); }
+
+        /* --- NEW GLOBAL INSTALLATION VIDEO SECTION --- */
+        .tutorial-section {
+            display: flex; align-items: center; justify-content: space-between;
+            margin: 0 auto 40px auto; width: 90%; max-width: 1000px; padding: 25px 40px;
+            gap: 20px; flex-wrap: wrap; z-index: 20; position: relative;
+        }
+        .tutorial-content {
+            display: flex; align-items: center; gap: 20px; flex: 1; min-width: 250px;
+        }
+        .tutorial-icon {
+            font-size: 45px; color: #ffcc00;
+            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.6));
+            animation: pulseIcon 2s ease-in-out infinite alternate;
+            will-change: transform, filter; /* PC lag fix */
+            transform: translateZ(0); /* GPU acceleration */
+            backface-visibility: hidden;
+        }
+        @keyframes pulseIcon {
+            0% { transform: scale(1) translateZ(0); filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.4)); }
+            100% { transform: scale(1.08) translateZ(0); filter: drop-shadow(0 0 25px rgba(255, 204, 0, 0.8)); }
+        }
+        .tutorial-text { text-align: left; }
+        .tutorial-text h3 { font-size: 20px; font-weight: 600; margin-bottom: 5px; color: #fff; letter-spacing: 0.5px;}
+        .tutorial-text p { font-size: 14px; color: #ccc; line-height: 1.4; margin: 0;}
+        
+        .tutorial-section .btn-video {
+            width: auto; padding: 14px 30px; font-size: 16px; white-space: nowrap;
+        }
 
         /* --- SOFTWARE GRID --- */
         .software-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 20px 5%; margin-bottom: 50px; z-index: 10;}
@@ -335,6 +363,10 @@
             .header-left, .header-right { justify-content: center; width: auto; }
             .header-center { order: 3; margin: 10px 0 0 0; max-width: 100%; width: 100%; } 
             .stacked-btns { flex-direction: row; gap: 15px; }
+            .tutorial-section { flex-direction: column; text-align: center; padding: 25px 20px;}
+            .tutorial-content { flex-direction: column; text-align: center; gap: 15px;}
+            .tutorial-text h3 { text-align: center;}
+            .tutorial-section .btn-video { width: 100%; }
         }
     </style>
 </head>
@@ -398,6 +430,20 @@
         <a href="#" class="btn-bundle">Buy Bundle Plans</a>
     </div>
 
+    <!-- NEW INSTALLATION VIDEO SECTION -->
+    <div class="tutorial-section glass-panel" id="tutorialSection">
+        <div class="tutorial-content">
+            <i class="fa-solid fa-circle-play tutorial-icon"></i>
+            <div class="tutorial-text">
+                <h3>Installation steps video</h3>
+                <p>Website kaise use karna hai, download & install process, sab kuch is video mein dekhein.</p>
+            </div>
+        </div>
+        <button class="btn btn-video" onclick="event.preventDefault(); openVideo('https://drive.google.com/file/d/1eRc7C8OLn8G9_vUHfZdj6GYnmGOhiZlL/preview')">
+            <i class="fa-solid fa-video"></i> Watch Video
+        </button>
+    </div>
+
     <div id="search-error">Oops! Software match nahin ho raha hai. Sahi naam type karein.</div>
 
     <div class="software-container" id="softwareList">
@@ -406,12 +452,12 @@
             <i class="fa-solid fa-money-check-dollar" style="font-size: 60px; color: #00ffcc; margin-bottom: 15px; filter: drop-shadow(0 0 15px #00ffcc);"></i>
             <div class="software-title">Payment Testing System</div>
             <p style="font-size: 13px; color: #ccc; margin-bottom: 10px; line-height: 1.4;">
-                Yah sirf payment test karne ke liye hai ki tum website per payment karne ke bad payment success hoga ya nahin hoga.
+                Sirf <strong>₹1</strong> ka demo payment karke website ka secure payment system test karo.
             </p>
             
             <div style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; margin-bottom: 20px;">
                 <p style="font-size: 13px; color: #fff; line-height: 1.5; margin: 0;">
-                    Agar tumko bhi aisi professional website chahie ya ye same website to mujhse contact karo.
+                    <i class="fa-solid fa-laptop-code" style="color: #00d2ff; margin-right: 5px;"></i> Apne liye aisi hi premium website banwani hai toh mujhse contact karo.
                 </p>
             </div>
 
@@ -428,7 +474,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('https://drive.google.com/file/d/1eRc7C8OLn8G9_vUHfZdj6GYnmGOhiZlL/preview')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -440,7 +485,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -452,7 +496,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -464,7 +507,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -476,7 +518,6 @@
             <div class="card-btns">
                 <a href="#" class="btn btn-download action-btn" onclick="event.preventDefault(); openDownloadModal();"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" class="btn btn-password action-btn" onclick="event.preventDefault(); window.location.href='https://maxpay.maxado.in/generate_payment.php?template=11756fc9281814bddeccaedeb111e2a8';"><i class="fa-solid fa-key"></i> Pay</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -488,7 +529,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -500,7 +540,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -512,7 +551,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -524,7 +562,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -536,7 +573,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -548,7 +584,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -560,7 +595,6 @@
             <div class="card-btns">
                 <a href="#" onclick="event.preventDefault();" class="btn btn-download action-btn"><i class="fa-solid fa-download"></i> Download</a>
                 <a href="#" onclick="event.preventDefault();" class="btn btn-password action-btn"><i class="fa-solid fa-key"></i> Get Password (Pay)</a>
-                <button class="btn btn-video action-btn" onclick="openVideo('#')"><i class="fa-solid fa-video"></i> Installation steps + proof video</button>
             </div>
         </div>
 
@@ -666,6 +700,7 @@
 
         const searchInput = document.getElementById('searchInput');
         const bundleSection = document.getElementById('bundleSection');
+        const tutorialSection = document.getElementById('tutorialSection'); 
         const searchError = document.getElementById('search-error');
         const allCards = document.querySelectorAll('.software-card');
 
@@ -673,7 +708,9 @@
             const query = this.value.toLowerCase().trim();
             
             if (query === "") {
-                bundleSection.style.display = 'block'; searchError.style.display = 'none';
+                bundleSection.style.display = 'block'; 
+                tutorialSection.style.display = 'flex'; 
+                searchError.style.display = 'none';
                 allCards.forEach(card => {
                     if(card.style.display === 'none' || card.style.display === '') {
                         card.style.display = 'flex';
@@ -686,6 +723,8 @@
             }
             
             bundleSection.style.display = 'none';
+            tutorialSection.style.display = 'none'; 
+            
             const queryWords = query.trim().split(/\s+/).filter(w => w.length > 0);
             let matchFound = false;
 
