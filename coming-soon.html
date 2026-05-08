@@ -63,18 +63,16 @@
         #coming-soon-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(5, 5, 13, 0.4);
-            backdrop-filter: blur(12px); /* Blurs the entire website content behind it */
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(5, 5, 13, 0.5);
+            /* Blur pehle se hi active rahega */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
             z-index: 9999; /* Shows up just under the smooth-intro */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            opacity: 0;
             pointer-events: auto; /* Blocks clicks on the website */
-            /* Fades in exactly when the intro animation ends */
-            animation: showComingSoon 1s ease-in-out 3.2s forwards;
         }
         
         .cs-title {
@@ -100,10 +98,6 @@
             text-shadow: 0 0 15px #00ffcc;
             text-align: center;
             animation: pulseSub 1.5s infinite alternate;
-        }
-
-        @keyframes showComingSoon {
-            to { opacity: 1; }
         }
         
         @keyframes floatBeat {
